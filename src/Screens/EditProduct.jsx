@@ -117,7 +117,7 @@ export default function EditProduct({ closeOnClick, editId }) {
           className="popup__container__form__heading"
           style={{ marginTop: 10 }}
         >
-          Content
+          Description
         </div>
         <CKEditor
           editor={ClassicEditor}
@@ -126,7 +126,19 @@ export default function EditProduct({ closeOnClick, editId }) {
             const data = editor.getData();
             setContent(data);
           }}
-        />
+        />{" "}
+        <div className="popup__container__form__heading">Price</div>
+        <div className="login__container__content__form__input">
+          <input
+            type="text"
+            placeholder="Price"
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
+            required
+          />
+        </div>
         <div>
           <div className="popup__container__form__heading">Upload Image</div>
           <Widget

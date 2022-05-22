@@ -20,7 +20,7 @@ function UserStatisticsCard() {
     <div className="user__statistics__card">
       <div className="user__statistics__card__header">
         <div className="user__statistics__card__header__heading">
-          User From sites
+          Categories sold
         </div>
         <div className="user__statistics__card__header__date">
           15 April - 15 May
@@ -31,22 +31,22 @@ function UserStatisticsCard() {
           <UserStatisticsChart />
         </div>
         <div className="user__statistics__card__content__right">
-          <UserFrom stroke="#FF5733" label="Facebook" />
-          <UserFrom stroke="#0A2751" label="Instagram" />
-          <UserFrom stroke="#00040e" label="Youtube" />
-          <UserFrom stroke="#0B5FD8" label="Google" />
+          <UserFrom stroke="#FF5733" label="Pizza" />
+          <UserFrom stroke="#0A2751" label="Burggers" />
+          <UserFrom stroke="#00040e" label="Fries" />
+          <UserFrom stroke="#0B5FD8" label="Drinks" />
         </div>
       </div>
     </div>
   );
 }
 
-function StatsCard({ stroke }) {
+function StatsCard({ stroke, title }) {
   return (
     <div className="stats__card" style={{ backgroundColor: stroke }}>
       <img src={chart} alt="chart" className="stats__card__img" />
       <div className="stats__card__content">
-        <div className="stats__card__content__heading">Toal Expense</div>
+        <div className="stats__card__content__heading">{title}</div>
         <div className="stats__card__content__value">$12,900</div>
       </div>
     </div>
@@ -124,20 +124,20 @@ export default function Dashboard() {
     <div className="dashboard__container">
       <div className="dashboard__container__col">
         <UserStatisticsCard />
-        <StatsCard stroke="#FF5733" />
+        <StatsCard title="Total Revenue" stroke="#FF5733" />
       </div>
       <div className="dashboard__container__col">
         <MonthlyStatsCard
           valueInPercentage="56%"
           stroke="#FF5733"
-          labal="Investor"
+          labal="Users"
         />
         <MonthlyStatsCard
           valueInPercentage="40%"
           stroke="#00040e"
-          labal="Startup"
+          labal="Orders"
         />
-        <StatsCard stroke="#00040e" />
+        <StatsCard title="Pending Orders" stroke="#00040e" />
       </div>
     </div>
   );
