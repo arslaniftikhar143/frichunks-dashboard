@@ -12,6 +12,10 @@ import Categories from "./Screens/Categories";
 import Products from "./Screens/Products";
 import Orders from "./Screens/Orders";
 import OrderDetails from "./Screens/OrderDetails";
+import EditCategory from "./Screens/EditCategory";
+import AddCategory from "./Screens/AddCategory";
+import AddProduct from "./Screens/AddProduct";
+import EditProduct from "./Screens/EditProduct";
 
 function Main() {
   return (
@@ -28,6 +32,10 @@ function Main() {
 function App() {
   axios.defaults.headers.common["Bypass-Tunnel-Reminder"] = true;
   const navigate = useNavigate();
+  const [isAddProduct, setIsAddProduct] = useState(false);
+  const [isEditProduct, setIsEditProduct] = useState(false);
+  const [isAddCategory, setIsAddCategory] = useState(false);
+  const [isEditCategory, setIsEditCategory] = useState(false);
   const [deleteConfirmation, setDeleteConfirmation] = useState(false);
   const [deleteConfirmationURL, setDeleteConfirmationURL] = useState("");
   const [deleteConfirmationId, setDeleteConfirmationId] = useState("");
@@ -39,6 +47,12 @@ function App() {
   }, [window.location.pathname]);
   return (
     <>
+      {isAddProduct ? <AddProduct closeOnClick={setIsAddProduct} /> : null}
+      {isEditProduct ? <EditProduct closeOnClick={setIsEditProduct} /> : null}
+      {isAddCategory ? <AddCategory closeOnClick={setIsAddCategory} /> : null}
+      {isEditCategory ? (
+        <EditCategory closeOnClick={setIsEditCategory} />
+      ) : null}
       {deleteConfirmation ? (
         <DeleteConfirmation
           deleteConfirmationURL={deleteConfirmationURL}
@@ -51,8 +65,28 @@ function App() {
         <Route path="/dashboard" element={<Main />}>
           <Route path="" element={<Dashboard />} />
           <Route path="users" element={<Users />} />
-          <Route path="categories" element={<Categories />} />
-          <Route path="products" element={<Products />} />
+          <Route
+            path="categories"
+            element={
+              <Categories
+                setIsEdit={setIsEditCategory}
+                isEdit={isEditCategory}
+                setIsAdd={setIsAddCategory}
+                isAdd={isAddCategory}
+              />
+            }
+          />
+          <Route
+            path="products"
+            element={
+              <Products
+                setIsEdit={setIsEditProduct}
+                isEdit={isEditProduct}
+                setIsAdd={setIsAddProduct}
+                isAdd={isAddProduct}
+              />
+            }
+          />
           <Route path="orders" element={<Orders />} />
           <Route path="order-details" element={<OrderDetails />} />
         </Route>

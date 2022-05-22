@@ -228,11 +228,20 @@ body {
   min-width: 550px;
   max-width: 550px;
   height: fit-content;
+  max-height: 90vh;
   background: $whiteColor;
   border-radius: 20px;
   border: 1px solid $primaryColor;
   padding: 2em;
+  overflow-y: auto;
 }
+.popup__container__form::-webkit-scrollbar {
+  width: 5px;
+}
+.popup__container__form::-webkit-scrollbar-thumb {
+  background-color: #ff5733;
+}
+
 .popup__container__form__header {
   display: flex;
   flex-direction: row;

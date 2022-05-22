@@ -31,7 +31,6 @@ export default function Products({
     { heading: "Name" },
     { heading: "Image" },
     { heading: "Description" },
-    { heading: "Rating" },
     { heading: "Delivery Time" },
   ];
 
