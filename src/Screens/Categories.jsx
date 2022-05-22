@@ -3,43 +3,44 @@ import axios from "axios";
 import TableEntryHeadings from "../Components/TableEntryHeadings";
 import Loader from "./Loader";
 import DeleteConfirmation from "./DeleteConfirmation";
+import { parseDate } from "../utils/parseDate";
 
-export default function Client({
-  isAddClient,
-  setIsAddClient,
-  isEditClient,
-  setIsEditClient,
-  setEditClientId,
+export default function Categories({
+  isAdd,
+  isEdit,
+  setIsEdit,
+  setIsAdd,
+  setEditId,
 }) {
-  const [ClientData, setClientData] = useState([]);
+  const [BlogData, setBlogData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [deleteConfirmation, setDeleteConfirmation] = useState(false);
   const [deleteConfirmationId, setDeleteConfirmationId] = useState("");
 
   useEffect(() => {
     axios
-      .get(`https://dsmeglobal-api.herokuapp.com/api/v1/get_client`)
+      .get(`https://dsmeglobal-api.herokuapp.com/api/v1/get_blog`)
       .then((res) => {
-        setClientData(res.data);
+        setBlogData(res.data);
         setLoading(false);
       });
-  }, [!isAddClient, !isEditClient, !deleteConfirmation]);
+  }, [!isAdd, !isEdit, !deleteConfirmation]);
 
   const tableHeadingRow = [
     { heading: "" },
-    { heading: "Logo" },
     { heading: "Name" },
+    { heading: "Image" },
   ];
 
   return (
     <>
       <div className="main__container">
         <div className="main__container__header">
-          <div className="main__container__header__heading">Our Clients</div>
+          <div className="main__container__header__heading">Categories</div>
           <div className="main__container__header__buttons">
             <button
               onClick={() => {
-                setIsAddClient(true);
+                setIsAdd(true);
               }}
               className="primary__button"
             >
@@ -54,17 +55,20 @@ export default function Client({
               <Loader />
             ) : (
               <>
-                {ClientData.length > 0 ? (
-                  ClientData.map((item, i) => (
+                {BlogData.length > 0 ? (
+                  BlogData.map((item, i) => (
                     <div className="entry__info__row" key={i}>
                       <div className="entry__info__row__btns">
                         <button
                           onClick={() => {
-                            setIsEditClient(true);
-                            setEditClientId({
+                            setIsEdit(true);
+                            setEditId({
                               _id: item._id,
-                              name: item.name,
-                              logo: item.logo,
+                              title: item.title,
+                              image: item.image,
+                              categories: item.categories,
+                              author: item.author,
+                              content: item.content,
                             });
                           }}
                           className="primary__button__rounded"
@@ -106,22 +110,50 @@ export default function Client({
                           </svg>
                         </button>
                       </div>
+                      <div className="entry__info__row__text">{item.title}</div>
+                      <div className="entry__info__row__text">
+                        {parseDate(item.updatedAt)}
+                      </div>
+                      <div className="entry__info__row__text">
+                        {item.author}
+                      </div>
+                      {item.categories.length < 40 ? (
+                        <div className="entry__info__row__text">
+                          {item.categories.map(
+                            (category) => category.label + ", "
+                          )}
+                        </div>
+                      ) : (
+                        <div className="entry__info__row__text">
+                          <a>
+                            Categories
+                            <div className="entry__info__row__text__message">
+                              {item.categories.map((category, i) =>
+                                i < item.categories.length
+                                  ? category.label + ", "
+                                  : category.label
+                              )}
+                            </div>
+                          </a>
+                        </div>
+                      )}
                       <div className="entry__info__row__text">
                         <img
                           src={
                             "https://res.cloudinary.com/mehfoozurrehman/image/upload/" +
-                            item.logo
+                            item.image
                           }
                           alt="tableEntryPic"
                           className="entry__info__row__text__img"
                         />
                       </div>
-                      <div
-                        className="entry__info__row__text"
-                        style={{ marginRight: "4em" }}
-                      >
-                        {item.name}
+                      {/* <div className="entry__info__row__text">{item.title}</div>
+                      
+                      
+                      <div className="entry__info__row__text">
+                        {item.isOur.map((item) => item.label)}
                       </div>
+                      <div className="entry__info__row__text">{item.url}</div> */}
                     </div>
                   ))
                 ) : (
@@ -145,14 +177,14 @@ export default function Client({
       {deleteConfirmation ? (
         <DeleteConfirmation
           closeOnClick={setDeleteConfirmation}
-          deleteConfirmationURL="delete_client"
+          deleteConfirmationURL="delete_blog"
           deleteConfirmationId={deleteConfirmationId}
           fetch={() => {
             setLoading(true);
             axios
-              .get(`https://dsmeglobal-api.herokuapp.com/api/v1/get_client`)
+              .get(`https://dsmeglobal-api.herokuapp.com/api/v1/get_blog`)
               .then((res) => {
-                setClientData(res.data);
+                setBlogData(res.data);
                 setLoading(false);
               });
           }}

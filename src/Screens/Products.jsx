@@ -3,41 +3,43 @@ import axios from "axios";
 import TableEntryHeadings from "../Components/TableEntryHeadings";
 import Loader from "./Loader";
 import DeleteConfirmation from "./DeleteConfirmation";
+import { parseDate } from "../utils/parseDate";
 
-export default function Work({
-  setEditId,
+export default function Products({
   isAdd,
   isEdit,
   setIsEdit,
   setIsAdd,
+  setEditId,
 }) {
-  const [WorkData, setWorkData] = useState([]);
+  const [BlogData, setBlogData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [deleteConfirmation, setDeleteConfirmation] = useState(false);
   const [deleteConfirmationId, setDeleteConfirmationId] = useState("");
+
   useEffect(() => {
     axios
-      .get(`https://dsmeglobal-api.herokuapp.com/api/v1/get_work`)
+      .get(`https://dsmeglobal-api.herokuapp.com/api/v1/get_blog`)
       .then((res) => {
-        setWorkData(res.data);
+        setBlogData(res.data);
         setLoading(false);
       });
   }, [!isAdd, !isEdit, !deleteConfirmation]);
 
   const tableHeadingRow = [
     { heading: "" },
-    { heading: "Logo" },
+    { heading: "Name" },
     { heading: "Image" },
-    { heading: "Company" },
-    { heading: "Title" },
     { heading: "Description" },
+    { heading: "Rating" },
+    { heading: "Delivery Time" },
   ];
 
   return (
     <>
       <div className="main__container">
         <div className="main__container__header">
-          <div className="main__container__header__heading">Our Work</div>
+          <div className="main__container__header__heading">Products</div>
           <div className="main__container__header__buttons">
             <button
               onClick={() => {
@@ -56,8 +58,8 @@ export default function Work({
               <Loader />
             ) : (
               <>
-                {WorkData.length > 0 ? (
-                  WorkData.map((item, i) => (
+                {BlogData.length > 0 ? (
+                  BlogData.map((item, i) => (
                     <div className="entry__info__row" key={i}>
                       <div className="entry__info__row__btns">
                         <button
@@ -65,11 +67,11 @@ export default function Work({
                             setIsEdit(true);
                             setEditId({
                               _id: item._id,
-                              company: item.company,
                               title: item.title,
-                              description: item.description,
-                              logo: item.logo,
                               image: item.image,
+                              categories: item.categories,
+                              author: item.author,
+                              content: item.content,
                             });
                           }}
                           className="primary__button__rounded"
@@ -111,16 +113,33 @@ export default function Work({
                           </svg>
                         </button>
                       </div>
+                      <div className="entry__info__row__text">{item.title}</div>
                       <div className="entry__info__row__text">
-                        <img
-                          src={
-                            "https://res.cloudinary.com/mehfoozurrehman/image/upload/" +
-                            item.logo
-                          }
-                          alt="tableEntryPic"
-                          className="entry__info__row__text__img"
-                        />
+                        {parseDate(item.updatedAt)}
                       </div>
+                      <div className="entry__info__row__text">
+                        {item.author}
+                      </div>
+                      {item.categories.length < 40 ? (
+                        <div className="entry__info__row__text">
+                          {item.categories.map(
+                            (category) => category.label + ", "
+                          )}
+                        </div>
+                      ) : (
+                        <div className="entry__info__row__text">
+                          <a>
+                            Categories
+                            <div className="entry__info__row__text__message">
+                              {item.categories.map((category, i) =>
+                                i < item.categories.length
+                                  ? category.label + ", "
+                                  : category.label
+                              )}
+                            </div>
+                          </a>
+                        </div>
+                      )}
                       <div className="entry__info__row__text">
                         <img
                           src={
@@ -131,24 +150,13 @@ export default function Work({
                           className="entry__info__row__text__img"
                         />
                       </div>
+                      {/* <div className="entry__info__row__text">{item.title}</div>
+                      
+                      
                       <div className="entry__info__row__text">
-                        {item.company}
+                        {item.isOur.map((item) => item.label)}
                       </div>
-                      <div className="entry__info__row__text">{item.title}</div>
-                      {item.description.length < 40 ? (
-                        <div className="entry__info__row__text">
-                          {item.description}
-                        </div>
-                      ) : (
-                        <div className="entry__info__row__text">
-                          <a>
-                            View Message
-                            <div className="entry__info__row__text__message">
-                              {item.description}
-                            </div>
-                          </a>
-                        </div>
-                      )}
+                      <div className="entry__info__row__text">{item.url}</div> */}
                     </div>
                   ))
                 ) : (
@@ -172,14 +180,14 @@ export default function Work({
       {deleteConfirmation ? (
         <DeleteConfirmation
           closeOnClick={setDeleteConfirmation}
-          deleteConfirmationURL="delete_work"
+          deleteConfirmationURL="delete_blog"
           deleteConfirmationId={deleteConfirmationId}
           fetch={() => {
             setLoading(true);
             axios
-              .get(`https://dsmeglobal-api.herokuapp.com/api/v1/get_work`)
+              .get(`https://dsmeglobal-api.herokuapp.com/api/v1/get_blog`)
               .then((res) => {
-                setWorkData(res.data);
+                setBlogData(res.data);
                 setLoading(false);
               });
           }}

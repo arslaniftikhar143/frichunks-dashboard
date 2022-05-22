@@ -4,41 +4,43 @@ import TableEntryHeadings from "../Components/TableEntryHeadings";
 import Loader from "./Loader";
 import DeleteConfirmation from "./DeleteConfirmation";
 import { parseDate } from "../utils/parseDate";
+import { useNavigate } from "react-router-dom";
 
-export default function Techonologies({
+export default function Orders({
   isAdd,
   isEdit,
   setIsEdit,
   setIsAdd,
   setEditId,
 }) {
-  const [TechonologiesData, setTechonologiesData] = useState([]);
+  const navigate = useNavigate();
+  const [BlogData, setBlogData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [deleteConfirmation, setDeleteConfirmation] = useState(false);
   const [deleteConfirmationId, setDeleteConfirmationId] = useState("");
 
   useEffect(() => {
     axios
-      .get(`https://dsmeglobal-api.herokuapp.com/api/v1/get_techonologies`)
+      .get(`https://dsmeglobal-api.herokuapp.com/api/v1/get_blog`)
       .then((res) => {
-        setTechonologiesData(res.data);
+        setBlogData(res.data);
         setLoading(false);
       });
   }, [!isAdd, !isEdit, !deleteConfirmation]);
 
   const tableHeadingRow = [
     { heading: "" },
-    { heading: "Name" },
-    { heading: "Image" },
+    { heading: "User" },
+    { heading: "Date" },
+    { heading: "Status" },
+    { heading: "Address" },
   ];
 
   return (
     <>
       <div className="main__container">
         <div className="main__container__header">
-          <div className="main__container__header__heading">
-            Our Technologies
-          </div>
+          <div className="main__container__header__heading">Orders</div>
           <div className="main__container__header__buttons">
             <button
               onClick={() => {
@@ -57,17 +59,40 @@ export default function Techonologies({
               <Loader />
             ) : (
               <>
-                {TechonologiesData.length > 0 ? (
-                  TechonologiesData.map((item, i) => (
+                {BlogData.length > 0 ? (
+                  BlogData.map((item, i) => (
                     <div className="entry__info__row" key={i}>
                       <div className="entry__info__row__btns">
+                        <button
+                          onClick={() => {
+                            navigate("/dashboard/order-details");
+                          }}
+                          className="primary__button__rounded"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="feather feather-eye"
+                          >
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                          </svg>
+                        </button>
                         <button
                           onClick={() => {
                             setIsEdit(true);
                             setEditId({
                               _id: item._id,
-                              name: item.name,
+                              title: item.title,
                               image: item.image,
+                              categories: item.categories,
+                              author: item.author,
+                              content: item.content,
                             });
                           }}
                           className="primary__button__rounded"
@@ -109,7 +134,33 @@ export default function Techonologies({
                           </svg>
                         </button>
                       </div>
-                      <div className="entry__info__row__text">{item.name}</div>
+                      <div className="entry__info__row__text">{item.title}</div>
+                      <div className="entry__info__row__text">
+                        {parseDate(item.updatedAt)}
+                      </div>
+                      <div className="entry__info__row__text">
+                        {item.author}
+                      </div>
+                      {item.categories.length < 40 ? (
+                        <div className="entry__info__row__text">
+                          {item.categories.map(
+                            (category) => category.label + ", "
+                          )}
+                        </div>
+                      ) : (
+                        <div className="entry__info__row__text">
+                          <a>
+                            Categories
+                            <div className="entry__info__row__text__message">
+                              {item.categories.map((category, i) =>
+                                i < item.categories.length
+                                  ? category.label + ", "
+                                  : category.label
+                              )}
+                            </div>
+                          </a>
+                        </div>
+                      )}
                       <div className="entry__info__row__text">
                         <img
                           src={
@@ -150,16 +201,14 @@ export default function Techonologies({
       {deleteConfirmation ? (
         <DeleteConfirmation
           closeOnClick={setDeleteConfirmation}
-          deleteConfirmationURL="delete_techonologies"
+          deleteConfirmationURL="delete_blog"
           deleteConfirmationId={deleteConfirmationId}
           fetch={() => {
             setLoading(true);
             axios
-              .get(
-                `https://dsmeglobal-api.herokuapp.com/api/v1/get_techonologies`
-              )
+              .get(`https://dsmeglobal-api.herokuapp.com/api/v1/get_blog`)
               .then((res) => {
-                setTechonologiesData(res.data);
+                setBlogData(res.data);
                 setLoading(false);
               });
           }}

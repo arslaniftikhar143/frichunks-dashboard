@@ -33,6 +33,7 @@ export default function Blogs({
     { heading: "Author" },
     { heading: "Category" },
     { heading: "Image" },
+    { heading: "Image" },
   ];
 
   return (

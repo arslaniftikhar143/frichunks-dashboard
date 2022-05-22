@@ -359,8 +359,8 @@ body {
   color: red;
 }
 .primary__button__rounded {
-  width: 40px;
-  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
   border-radius: 50px;
   border: none;
   padding: 0em;
@@ -381,8 +381,8 @@ body {
   height: 16px;
 }
 .secondary__button__rounded {
-  width: 40px;
-  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
   border-radius: 50px;
   padding: 0em;
   display: flex;

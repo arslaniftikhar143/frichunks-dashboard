@@ -3,45 +3,42 @@ import axios from "axios";
 import TableEntryHeadings from "../Components/TableEntryHeadings";
 import Loader from "./Loader";
 import DeleteConfirmation from "./DeleteConfirmation";
+import { parseDate } from "../utils/parseDate";
 
-export default function CareersApplications({
+export default function OrderDetails({
   isAdd,
   isEdit,
   setIsEdit,
   setIsAdd,
   setEditId,
 }) {
-  const [careersAppliedData, setCareersAppliedData] = useState([]);
+  const [BlogData, setBlogData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [deleteConfirmation, setDeleteConfirmation] = useState(false);
   const [deleteConfirmationId, setDeleteConfirmationId] = useState("");
 
   useEffect(() => {
     axios
-      .get(`https://dsmeglobal-api.herokuapp.com/api/v1/get_careers_applied`)
+      .get(`https://dsmeglobal-api.herokuapp.com/api/v1/get_blog`)
       .then((res) => {
-        setCareersAppliedData(res.data);
+        setBlogData(res.data);
         setLoading(false);
       });
   }, [!isAdd, !isEdit, !deleteConfirmation]);
 
   const tableHeadingRow = [
     { heading: "" },
-    { heading: "Name" },
-    { heading: "Email" },
-    { heading: "Phone" },
-    { heading: "Position" },
-    { heading: "Department" },
-    { heading: "CV" },
+    { heading: "User" },
+    { heading: "Date" },
+    { heading: "Status" },
+    { heading: "Address" },
   ];
 
   return (
     <>
       <div className="main__container">
         <div className="main__container__header">
-          <div className="main__container__header__heading">
-            Careers Applications
-          </div>
+          <div className="main__container__header__heading">Order Details</div>
           <div className="main__container__header__buttons">
             <button
               onClick={() => {
@@ -60,8 +57,8 @@ export default function CareersApplications({
               <Loader />
             ) : (
               <>
-                {careersAppliedData.length > 0 ? (
-                  careersAppliedData.map((item, i) => (
+                {BlogData.length > 0 ? (
+                  BlogData.map((item, i) => (
                     <div className="entry__info__row" key={i}>
                       <div className="entry__info__row__btns">
                         <button
@@ -69,12 +66,11 @@ export default function CareersApplications({
                             setIsEdit(true);
                             setEditId({
                               _id: item._id,
-                              name: item.name,
-                              email: item.email,
-                              phone: item.phone,
-                              position: item.position,
-                              department: item.department,
-                              cv: item.cv,
+                              title: item.title,
+                              image: item.image,
+                              categories: item.categories,
+                              author: item.author,
+                              content: item.content,
                             });
                           }}
                           className="primary__button__rounded"
@@ -116,29 +112,50 @@ export default function CareersApplications({
                           </svg>
                         </button>
                       </div>
-                      <div className="entry__info__row__text">{item.name}</div>
+                      <div className="entry__info__row__text">{item.title}</div>
                       <div className="entry__info__row__text">
-                        {item.email}
-
-                        {/* {parseDate(item.updatedAt)} */}
-                      </div>
-                      <div className="entry__info__row__text">{item.phone}</div>
-                      <div className="entry__info__row__text">
-                        {item.position}
+                        {parseDate(item.updatedAt)}
                       </div>
                       <div className="entry__info__row__text">
-                        {item.department.map((item) => item.label)}
+                        {item.author}
                       </div>
+                      {item.categories.length < 40 ? (
+                        <div className="entry__info__row__text">
+                          {item.categories.map(
+                            (category) => category.label + ", "
+                          )}
+                        </div>
+                      ) : (
+                        <div className="entry__info__row__text">
+                          <a>
+                            Categories
+                            <div className="entry__info__row__text__message">
+                              {item.categories.map((category, i) =>
+                                i < item.categories.length
+                                  ? category.label + ", "
+                                  : category.label
+                              )}
+                            </div>
+                          </a>
+                        </div>
+                      )}
                       <div className="entry__info__row__text">
-                        <a
-                          href={
+                        <img
+                          src={
                             "https://res.cloudinary.com/mehfoozurrehman/image/upload/" +
-                            item.cv
+                            item.image
                           }
-                        >
-                          View CV
-                        </a>
+                          alt="tableEntryPic"
+                          className="entry__info__row__text__img"
+                        />
                       </div>
+                      {/* <div className="entry__info__row__text">{item.title}</div>
+                      
+                      
+                      <div className="entry__info__row__text">
+                        {item.isOur.map((item) => item.label)}
+                      </div>
+                      <div className="entry__info__row__text">{item.url}</div> */}
                     </div>
                   ))
                 ) : (
@@ -162,16 +179,14 @@ export default function CareersApplications({
       {deleteConfirmation ? (
         <DeleteConfirmation
           closeOnClick={setDeleteConfirmation}
-          deleteConfirmationURL="delete_careers_applied"
+          deleteConfirmationURL="delete_blog"
           deleteConfirmationId={deleteConfirmationId}
           fetch={() => {
             setLoading(true);
             axios
-              .get(
-                `https://dsmeglobal-api.herokuapp.com/api/v1/get_careers_applied`
-              )
+              .get(`https://dsmeglobal-api.herokuapp.com/api/v1/get_blog`)
               .then((res) => {
-                setCareersAppliedData(res.data);
+                setBlogData(res.data);
                 setLoading(false);
               });
           }}

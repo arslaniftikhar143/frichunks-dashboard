@@ -4,43 +4,41 @@ import TableEntryHeadings from "../Components/TableEntryHeadings";
 import Loader from "./Loader";
 import DeleteConfirmation from "./DeleteConfirmation";
 import { parseDate } from "../utils/parseDate";
-import { getText } from "../utils/getText";
 
-export default function Vacancies({
+export default function Users({
   isAdd,
   isEdit,
   setIsEdit,
   setIsAdd,
   setEditId,
 }) {
-  const [VacanciesData, setVacanciesData] = useState([]);
+  const [BlogData, setBlogData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [deleteConfirmation, setDeleteConfirmation] = useState(false);
   const [deleteConfirmationId, setDeleteConfirmationId] = useState("");
 
   useEffect(() => {
     axios
-      .get(`https://dsmeglobal-api.herokuapp.com/api/v1/get_careers`)
+      .get(`https://dsmeglobal-api.herokuapp.com/api/v1/get_blog`)
       .then((res) => {
-        setVacanciesData(res.data);
+        setBlogData(res.data);
         setLoading(false);
       });
   }, [!isAdd, !isEdit, !deleteConfirmation]);
 
   const tableHeadingRow = [
     { heading: "" },
-    { heading: "Position" },
-    { heading: "Date" },
-    { heading: "Description" },
-    { heading: "Requirements" },
-    { heading: "Department" },
+    { heading: "Name" },
+    { heading: "Email" },
+    { heading: "Phone" },
+    { heading: "Address" },
   ];
 
   return (
     <>
       <div className="main__container">
         <div className="main__container__header">
-          <div className="main__container__header__heading">Vacancies</div>
+          <div className="main__container__header__heading">Users</div>
           <div className="main__container__header__buttons">
             <button
               onClick={() => {
@@ -59,8 +57,8 @@ export default function Vacancies({
               <Loader />
             ) : (
               <>
-                {VacanciesData.length > 0 ? (
-                  VacanciesData.map((item, i) => (
+                {BlogData.length > 0 ? (
+                  BlogData.map((item, i) => (
                     <div className="entry__info__row" key={i}>
                       <div className="entry__info__row__btns">
                         <button
@@ -68,10 +66,11 @@ export default function Vacancies({
                             setIsEdit(true);
                             setEditId({
                               _id: item._id,
-                              position: item.position,
-                              department: item.department,
-                              description: item.description,
-                              requirements: item.requirements,
+                              title: item.title,
+                              image: item.image,
+                              categories: item.categories,
+                              author: item.author,
+                              content: item.content,
                             });
                           }}
                           className="primary__button__rounded"
@@ -113,34 +112,50 @@ export default function Vacancies({
                           </svg>
                         </button>
                       </div>
-                      <div className="entry__info__row__text">
-                        {item.position}
-                      </div>
+                      <div className="entry__info__row__text">{item.title}</div>
                       <div className="entry__info__row__text">
                         {parseDate(item.updatedAt)}
                       </div>
                       <div className="entry__info__row__text">
-                        {item.description}
+                        {item.author}
                       </div>
+                      {item.categories.length < 40 ? (
+                        <div className="entry__info__row__text">
+                          {item.categories.map(
+                            (category) => category.label + ", "
+                          )}
+                        </div>
+                      ) : (
+                        <div className="entry__info__row__text">
+                          <a>
+                            Categories
+                            <div className="entry__info__row__text__message">
+                              {item.categories.map((category, i) =>
+                                i < item.categories.length
+                                  ? category.label + ", "
+                                  : category.label
+                              )}
+                            </div>
+                          </a>
+                        </div>
+                      )}
                       <div className="entry__info__row__text">
-                        {getText(item.requirements).length < 40 ? (
-                          <div className="entry__info__row__text">
-                            {getText(item.requirements)}
-                          </div>
-                        ) : (
-                          <div className="entry__info__row__text">
-                            <a>
-                              View Details
-                              <div className="entry__info__row__text__message">
-                                {getText(item.requirements)}
-                              </div>
-                            </a>
-                          </div>
-                        )}
+                        <img
+                          src={
+                            "https://res.cloudinary.com/mehfoozurrehman/image/upload/" +
+                            item.image
+                          }
+                          alt="tableEntryPic"
+                          className="entry__info__row__text__img"
+                        />
                       </div>
+                      {/* <div className="entry__info__row__text">{item.title}</div>
+                      
+                      
                       <div className="entry__info__row__text">
-                        {item.department.map((item) => item.label)}
+                        {item.isOur.map((item) => item.label)}
                       </div>
+                      <div className="entry__info__row__text">{item.url}</div> */}
                     </div>
                   ))
                 ) : (
@@ -164,14 +179,14 @@ export default function Vacancies({
       {deleteConfirmation ? (
         <DeleteConfirmation
           closeOnClick={setDeleteConfirmation}
-          deleteConfirmationURL="delete_careers"
+          deleteConfirmationURL="delete_blog"
           deleteConfirmationId={deleteConfirmationId}
           fetch={() => {
             setLoading(true);
             axios
-              .get(`https://dsmeglobal-api.herokuapp.com/api/v1/get_careers`)
+              .get(`https://dsmeglobal-api.herokuapp.com/api/v1/get_blog`)
               .then((res) => {
-                setVacanciesData(res.data);
+                setBlogData(res.data);
                 setLoading(false);
               });
           }}
