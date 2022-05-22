@@ -16,6 +16,8 @@ import EditCategory from "./Screens/EditCategory";
 import AddCategory from "./Screens/AddCategory";
 import AddProduct from "./Screens/AddProduct";
 import EditProduct from "./Screens/EditProduct";
+import AddOrder from "./Screens/AddOrder";
+import EditOrder from "./Screens/EditOrder";
 
 function Main() {
   return (
@@ -36,6 +38,8 @@ function App() {
   const [isEditProduct, setIsEditProduct] = useState(false);
   const [isAddCategory, setIsAddCategory] = useState(false);
   const [isEditCategory, setIsEditCategory] = useState(false);
+  const [isAddOrder, setIsAddOrder] = useState(false);
+  const [isEditOrder, setIsEditOrder] = useState(false);
   const [deleteConfirmation, setDeleteConfirmation] = useState(false);
   const [deleteConfirmationURL, setDeleteConfirmationURL] = useState("");
   const [deleteConfirmationId, setDeleteConfirmationId] = useState("");
@@ -47,6 +51,8 @@ function App() {
   }, [window.location.pathname]);
   return (
     <>
+      {isAddOrder ? <AddOrder closeOnClick={setIsAddOrder} /> : null}
+      {isEditOrder ? <EditOrder closeOnClick={setIsEditOrder} /> : null}
       {isAddProduct ? <AddProduct closeOnClick={setIsAddProduct} /> : null}
       {isEditProduct ? <EditProduct closeOnClick={setIsEditProduct} /> : null}
       {isAddCategory ? <AddCategory closeOnClick={setIsAddCategory} /> : null}
@@ -87,7 +93,17 @@ function App() {
               />
             }
           />
-          <Route path="orders" element={<Orders />} />
+          <Route
+            path="orders"
+            element={
+              <Orders
+                setIsAdd={setIsAddOrder}
+                isAdd={isAddOrder}
+                setIsEdit={setIsEditOrder}
+                isEdit={isEditOrder}
+              />
+            }
+          />
           <Route path="order-details" element={<OrderDetails />} />
         </Route>
       </Routes>

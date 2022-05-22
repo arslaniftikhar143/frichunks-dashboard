@@ -39,16 +39,7 @@ export default function Users({
       <div className="main__container">
         <div className="main__container__header">
           <div className="main__container__header__heading">Users</div>
-          <div className="main__container__header__buttons">
-            <button
-              onClick={() => {
-                setIsAdd(true);
-              }}
-              className="primary__button"
-            >
-              Add
-            </button>
-          </div>
+          <div className="main__container__header__buttons"></div>
         </div>
         <div className="main__container__content">
           <div className="main__container__content__table">
@@ -61,33 +52,6 @@ export default function Users({
                   BlogData.map((item, i) => (
                     <div className="entry__info__row" key={i}>
                       <div className="entry__info__row__btns">
-                        <button
-                          onClick={() => {
-                            setIsEdit(true);
-                            setEditId({
-                              _id: item._id,
-                              title: item.title,
-                              image: item.image,
-                              categories: item.categories,
-                              author: item.author,
-                              content: item.content,
-                            });
-                          }}
-                          className="primary__button__rounded"
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="feather feather-edit-2"
-                          >
-                            <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
-                          </svg>
-                        </button>
                         <button
                           onClick={() => {
                             setDeleteConfirmation(true);
