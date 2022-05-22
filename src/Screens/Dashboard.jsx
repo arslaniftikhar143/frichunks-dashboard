@@ -31,7 +31,7 @@ function UserStatisticsCard() {
           <UserStatisticsChart />
         </div>
         <div className="user__statistics__card__content__right">
-          <UserFrom stroke="#0f593e" label="Facebook" />
+          <UserFrom stroke="#FF5733" label="Facebook" />
           <UserFrom stroke="#0A2751" label="Instagram" />
           <UserFrom stroke="#00040e" label="Youtube" />
           <UserFrom stroke="#0B5FD8" label="Google" />
@@ -124,12 +124,12 @@ export default function Dashboard() {
     <div className="dashboard__container">
       <div className="dashboard__container__col">
         <UserStatisticsCard />
-        <StatsCard stroke="#0f593e" />
+        <StatsCard stroke="#FF5733" />
       </div>
       <div className="dashboard__container__col">
         <MonthlyStatsCard
           valueInPercentage="56%"
-          stroke="#0f593e"
+          stroke="#FF5733"
           labal="Investor"
         />
         <MonthlyStatsCard
