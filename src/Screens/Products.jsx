@@ -29,10 +29,10 @@ export default function Products({
   const tableHeadingRow = [
     { heading: "" },
     { heading: "Name" },
-    { heading: "Image" },
-    { heading: "Description" },
     { heading: "Delivery Time" },
     { heading: "Price" },
+    { heading: "Description" },
+    { heading: "Image" },
   ];
 
   return (
@@ -114,32 +114,12 @@ export default function Products({
                         </button>
                       </div>
                       <div className="entry__info__row__text">{item.title}</div>
+                      <div className="entry__info__row__text">10:30 PM</div>
+                      <div className="entry__info__row__text">RS 1250</div>
                       <div className="entry__info__row__text">
-                        {parseDate(item.updatedAt)}
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Illo, eius!
                       </div>
-                      <div className="entry__info__row__text">
-                        {item.author}
-                      </div>
-                      {item.categories.length < 40 ? (
-                        <div className="entry__info__row__text">
-                          {item.categories.map(
-                            (category) => category.label + ", "
-                          )}
-                        </div>
-                      ) : (
-                        <div className="entry__info__row__text">
-                          <a>
-                            Categories
-                            <div className="entry__info__row__text__message">
-                              {item.categories.map((category, i) =>
-                                i < item.categories.length
-                                  ? category.label + ", "
-                                  : category.label
-                              )}
-                            </div>
-                          </a>
-                        </div>
-                      )}
                       <div className="entry__info__row__text">
                         <img
                           src={

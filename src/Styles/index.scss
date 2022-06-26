@@ -129,9 +129,9 @@ body {
 
 .entry__info__row__btns {
   max-width: 100px;
-  min-width: 100px;
+  min-width: 200px;
   display: flex;
-  margin-right: 1.5em;
+  margin-right: 1em;
 }
 
 .entry__info__row__text {
@@ -142,6 +142,7 @@ body {
   text-align: center;
   max-width: 150px;
   margin-right: 2em;
+  text-transform: capitalize;
   word-wrap: break-word;
 }
 
@@ -423,7 +424,7 @@ body {
   justify-content: center;
   background: #ff5733;
   color: #fff;
-  margin-right: 12px;
+  margin-right: 5px;
   cursor: pointer;
 }
 
@@ -662,6 +663,7 @@ body {
   max-width: 150px;
   margin-right: 2em;
   word-wrap: break-word;
+  text-transform: capitalize;
 }
 
 .table__wrapper__heading {
@@ -1346,6 +1348,7 @@ body {
   max-width: 150px;
   margin-right: 2em;
   word-wrap: break-word;
+  text-transform: capitalize;
 }
 
 .table__wrapper__heading {
@@ -2005,6 +2008,7 @@ body {
   max-width: 150px;
   margin-right: 2em;
   word-wrap: break-word;
+  text-transform: capitalize;
 }
 
 .table__wrapper__heading {
@@ -2630,6 +2634,7 @@ body {
   max-width: 150px;
   margin-right: 2em;
   word-wrap: break-word;
+  text-transform: capitalize;
 }
 
 .table__wrapper__heading {

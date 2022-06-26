@@ -65,26 +65,6 @@ export default function Orders({
                       <div className="entry__info__row__btns">
                         <button
                           onClick={() => {
-                            navigate("/dashboard/order-details");
-                          }}
-                          className="primary__button__rounded"
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="feather feather-eye"
-                          >
-                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                            <circle cx="12" cy="12" r="3"></circle>
-                          </svg>
-                        </button>
-                        <button
-                          onClick={() => {
                             setIsEdit(true);
                             setEditId({
                               _id: item._id,
@@ -134,50 +114,37 @@ export default function Orders({
                           </svg>
                         </button>
                       </div>
-                      <div className="entry__info__row__text">{item.title}</div>
+                      <div className="entry__info__row__text">User Name</div>
                       <div className="entry__info__row__text">
                         {parseDate(item.updatedAt)}
                       </div>
+                      <div className="entry__info__row__text">Paid</div>
                       <div className="entry__info__row__text">
-                        {item.author}
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Odit, maiores!
                       </div>
-                      {item.categories.length < 40 ? (
-                        <div className="entry__info__row__text">
-                          {item.categories.map(
-                            (category) => category.label + ", "
-                          )}
-                        </div>
-                      ) : (
-                        <div className="entry__info__row__text">
-                          <a>
-                            Categories
-                            <div className="entry__info__row__text__message">
-                              {item.categories.map((category, i) =>
-                                i < item.categories.length
-                                  ? category.label + ", "
-                                  : category.label
-                              )}
-                            </div>
-                          </a>
-                        </div>
-                      )}
-                      <div className="entry__info__row__text">
-                        <img
-                          src={
-                            "https://res.cloudinary.com/mehfoozurrehman/image/upload/" +
-                            item.image
-                          }
-                          alt="tableEntryPic"
-                          className="entry__info__row__text__img"
-                        />
+                      <div className="entry__info__row__btns">
+                        <button
+                          onClick={() => {
+                            navigate("/dashboard/order-details");
+                          }}
+                          className="primary__button__rounded"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="feather feather-eye"
+                          >
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                          </svg>
+                        </button>
                       </div>
-                      {/* <div className="entry__info__row__text">{item.title}</div>
-                      
-                      
-                      <div className="entry__info__row__text">
-                        {item.isOur.map((item) => item.label)}
-                      </div>
-                      <div className="entry__info__row__text">{item.url}</div> */}
                     </div>
                   ))
                 ) : (

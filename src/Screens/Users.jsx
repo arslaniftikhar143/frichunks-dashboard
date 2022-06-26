@@ -70,42 +70,14 @@ export default function Users({ isAdd, isEdit }) {
                           </svg>
                         </button>
                       </div>
-                      <div className="entry__info__row__text">{item.title}</div>
+                      <div className="entry__info__row__text">User name</div>
                       <div className="entry__info__row__text">
-                        {parseDate(item.updatedAt)}
+                        Someone@gmail.com
                       </div>
+                      <div className="entry__info__row__text">+92 12355356</div>
                       <div className="entry__info__row__text">
-                        {item.author}
-                      </div>
-                      {item.categories.length < 40 ? (
-                        <div className="entry__info__row__text">
-                          {item.categories.map(
-                            (category) => category.label + ", "
-                          )}
-                        </div>
-                      ) : (
-                        <div className="entry__info__row__text">
-                          <a>
-                            Categories
-                            <div className="entry__info__row__text__message">
-                              {item.categories.map((category, i) =>
-                                i < item.categories.length
-                                  ? category.label + ", "
-                                  : category.label
-                              )}
-                            </div>
-                          </a>
-                        </div>
-                      )}
-                      <div className="entry__info__row__text">
-                        <img
-                          src={
-                            "https://res.cloudinary.com/mehfoozurrehman/image/upload/" +
-                            item.image
-                          }
-                          alt="tableEntryPic"
-                          className="entry__info__row__text__img"
-                        />
+                        Lorem ipsum, dolor sit amet consectetur adipisicing
+                        elit. Nobis, nemo.
                       </div>
                     </div>
                   ))

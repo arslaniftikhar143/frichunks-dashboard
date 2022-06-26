@@ -111,32 +111,6 @@ export default function Categories({
                       </div>
                       <div className="entry__info__row__text">{item.title}</div>
                       <div className="entry__info__row__text">
-                        {parseDate(item.updatedAt)}
-                      </div>
-                      <div className="entry__info__row__text">
-                        {item.author}
-                      </div>
-                      {item.categories.length < 40 ? (
-                        <div className="entry__info__row__text">
-                          {item.categories.map(
-                            (category) => category.label + ", "
-                          )}
-                        </div>
-                      ) : (
-                        <div className="entry__info__row__text">
-                          <a>
-                            Categories
-                            <div className="entry__info__row__text__message">
-                              {item.categories.map((category, i) =>
-                                i < item.categories.length
-                                  ? category.label + ", "
-                                  : category.label
-                              )}
-                            </div>
-                          </a>
-                        </div>
-                      )}
-                      <div className="entry__info__row__text">
                         <img
                           src={
                             "https://res.cloudinary.com/mehfoozurrehman/image/upload/" +
@@ -146,13 +120,6 @@ export default function Categories({
                           className="entry__info__row__text__img"
                         />
                       </div>
-                      {/* <div className="entry__info__row__text">{item.title}</div>
-                      
-                      
-                      <div className="entry__info__row__text">
-                        {item.isOur.map((item) => item.label)}
-                      </div>
-                      <div className="entry__info__row__text">{item.url}</div> */}
                     </div>
                   ))
                 ) : (
