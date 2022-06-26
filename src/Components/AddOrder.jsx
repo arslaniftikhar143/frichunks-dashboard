@@ -1,27 +1,16 @@
-import axios from "axios";
 import React, { useState } from "react";
 import Select from "react-select";
 import catagoryDataOption from "../constants/constant";
 
 export default function AddOrder({ closeOnClick }) {
-  const [name, setName] = useState("");
-  const [image, setImage] = useState("");
   const [categories, setCategories] = useState("");
   const [author, setAuthor] = useState("");
-  const [content, setContent] = useState("");
 
   return (
     <div className="popup__container">
       <form
         onSubmit={() => {
           closeOnClick(false);
-          axios.post(`https://dsmeglobal-api.herokuapp.com/api/v1/set_blog`, {
-            title: name,
-            author: author,
-            categories: categories,
-            image: image,
-            content: content,
-          });
         }}
         className="popup__container__form"
       >

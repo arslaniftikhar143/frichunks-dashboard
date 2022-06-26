@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { Widget } from "react-cloudinary-upload-widget";
 import Select from "react-select";
@@ -6,31 +5,23 @@ import catagoryDataOption from "../constants/constant";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
-export default function EditProduct({ closeOnClick, editId }) {
+export default function AddBlog({ closeOnClick }) {
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
-  const [oldImage, setOldImage] = useState("");
   const [categories, setCategories] = useState("");
   const [author, setAuthor] = useState("");
   const [content, setContent] = useState("");
+
   return (
     <div className="popup__container">
       <form
         onSubmit={() => {
           closeOnClick(false);
-          axios.put(`https://dsmeglobal-api.herokuapp.com/api/v1/update_blog`, {
-            _id: editId._id,
-            title: name,
-            image: image === "" ? oldImage : image,
-            categories: categories,
-            author: author,
-            content: content,
-          });
         }}
         className="popup__container__form"
       >
         <div className="popup__container__form__header">
-          <div>Edit Product</div>
+          <div>Add Blog</div>
           <button
             onClick={() => {
               closeOnClick(false);
@@ -85,6 +76,18 @@ export default function EditProduct({ closeOnClick, editId }) {
             required
           />
         </div>
+        <div className="popup__container__form__heading">Author</div>
+        <div className="login__container__content__form__input">
+          <input
+            type="text"
+            placeholder="Author"
+            value={author}
+            onChange={(e) => {
+              setAuthor(e.target.value);
+            }}
+            required
+          />
+        </div>
         <div className="popup__container__form__heading">Categories</div>
         <div className="login__container__content__form__input">
           <Select
@@ -102,28 +105,16 @@ export default function EditProduct({ closeOnClick, editId }) {
           className="popup__container__form__heading"
           style={{ marginTop: 10 }}
         >
-          Description
+          Content
         </div>
         <CKEditor
           editor={ClassicEditor}
-          data={content}
+          data=""
           onChange={(event, editor) => {
             const data = editor.getData();
             setContent(data);
           }}
         />
-        <div className="popup__container__form__heading">Price</div>
-        <div className="login__container__content__form__input">
-          <input
-            type="text"
-            placeholder="Price"
-            value={name}
-            onChange={(e) => {
-              setName(e.target.value);
-            }}
-            required
-          />
-        </div>
         <div>
           <div className="popup__container__form__heading">Upload Image</div>
           <Widget
@@ -132,19 +123,21 @@ export default function EditProduct({ closeOnClick, editId }) {
             cloudName={"mehfoozurrehman"}
             uploadPreset={"cqido5en"}
             buttonText={
-              <img
-                src={
-                  image === ""
-                    ? "https://res.cloudinary.com/mehfoozurrehman/image/upload/" +
-                      oldImage
-                    : "https://res.cloudinary.com/mehfoozurrehman/image/upload/" +
-                      image
-                }
-                style={{ width: "100%", height: "100%" }}
-              />
+              image !== "" ? (
+                <img
+                  src={
+                    "https://res.cloudinary.com/mehfoozurrehman/image/upload/" +
+                    image
+                  }
+                  style={{ width: "100%", height: "100%" }}
+                />
+              ) : (
+                "+"
+              )
             }
             style={{
               color: "black",
+              border: "none",
               width: "120px",
               backgroundColor: "white",
               border: "1px solid #242424",
@@ -176,7 +169,7 @@ export default function EditProduct({ closeOnClick, editId }) {
           style={{ marginTop: "1em", marginBottom: "1em" }}
           className="secondary__button"
         >
-          Edit
+          Add
         </button>
       </form>
     </div>

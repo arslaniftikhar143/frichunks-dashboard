@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import TableEntryHeadings from "../Components/TableEntryHeadings";
-import DeleteConfirmation from "./DeleteConfirmation";
-import { UsersListEntry } from "./UsersListEntry";
+import DeleteConfirmation from "../Components/DeleteConfirmation";
+import { UsersListEntry } from "../Components/UsersListEntry";
 
 export default function Users() {
   const [deleteConfirmation, setDeleteConfirmation] = useState(false);

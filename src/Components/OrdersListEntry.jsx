@@ -1,7 +1,7 @@
 import React from "react";
 import { EditButton } from "./EditButton";
 import { DeleteButton } from "./DeleteButton";
-import { ViewButton } from "./ViewButton";
+import { ViewButton } from "../Components/ViewButton";
 
 export function OrdersListEntry({
   setIsEdit,

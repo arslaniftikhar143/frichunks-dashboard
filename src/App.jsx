@@ -12,12 +12,12 @@ import Categories from "./Screens/Categories";
 import Products from "./Screens/Products";
 import Orders from "./Screens/Orders";
 import OrderDetails from "./Screens/OrderDetails";
-import EditCategory from "./Screens/EditCategory";
-import AddCategory from "./Screens/AddCategory";
-import AddProduct from "./Screens/AddProduct";
-import EditProduct from "./Screens/EditProduct";
-import AddOrder from "./Screens/AddOrder";
-import EditOrder from "./Screens/EditOrder";
+import EditCategory from "./Components/EditCategory";
+import AddCategory from "./Components/AddCategory";
+import AddProduct from "./Components/AddProduct";
+import EditProduct from "./Components/EditProduct";
+import AddOrder from "./Components/AddOrder";
+import EditOrder from "./Components/EditOrder";
 
 function Main() {
   return (

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import TableEntryHeadings from "../Components/TableEntryHeadings";
-import { DeleteButton } from "./DeleteButton";
-import DeleteConfirmation from "./DeleteConfirmation";
-import { EditButton } from "./EditButton";
+import { DeleteButton } from "../Components/DeleteButton";
+import DeleteConfirmation from "../Components/DeleteConfirmation";
+import { EditButton } from "../Components/EditButton";
 
 export default function Categories({ setIsEdit, setIsAdd, setEditId }) {
   const [deleteConfirmation, setDeleteConfirmation] = useState(false);

@@ -1,35 +1,20 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { Widget } from "react-cloudinary-upload-widget";
-import Select from "react-select";
-import catagoryDataOption from "../constants/constant";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
-export default function AddBlog({ closeOnClick }) {
+export default function AddCategory({ closeOnClick }) {
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
-  const [categories, setCategories] = useState("");
-  const [author, setAuthor] = useState("");
-  const [content, setContent] = useState("");
 
   return (
     <div className="popup__container">
       <form
         onSubmit={() => {
           closeOnClick(false);
-          axios.post(`https://dsmeglobal-api.herokuapp.com/api/v1/set_blog`, {
-            title: name,
-            author: author,
-            categories: categories,
-            image: image,
-            content: content,
-          });
         }}
         className="popup__container__form"
       >
         <div className="popup__container__form__header">
-          <div>Add Blog</div>
+          <div>Add Category</div>
           <button
             onClick={() => {
               closeOnClick(false);
@@ -84,45 +69,6 @@ export default function AddBlog({ closeOnClick }) {
             required
           />
         </div>
-        <div className="popup__container__form__heading">Author</div>
-        <div className="login__container__content__form__input">
-          <input
-            type="text"
-            placeholder="Author"
-            value={author}
-            onChange={(e) => {
-              setAuthor(e.target.value);
-            }}
-            required
-          />
-        </div>
-        <div className="popup__container__form__heading">Categories</div>
-        <div className="login__container__content__form__input">
-          <Select
-            options={catagoryDataOption}
-            placeholder="Categories"
-            isMulti
-            required
-            value={categories}
-            onChange={(e) => {
-              setCategories(e);
-            }}
-          />
-        </div>
-        <div
-          className="popup__container__form__heading"
-          style={{ marginTop: 10 }}
-        >
-          Content
-        </div>
-        <CKEditor
-          editor={ClassicEditor}
-          data=""
-          onChange={(event, editor) => {
-            const data = editor.getData();
-            setContent(data);
-          }}
-        />
         <div>
           <div className="popup__container__form__heading">Upload Image</div>
           <Widget
@@ -145,7 +91,6 @@ export default function AddBlog({ closeOnClick }) {
             }
             style={{
               color: "black",
-              border: "none",
               width: "120px",
               backgroundColor: "white",
               border: "1px solid #242424",

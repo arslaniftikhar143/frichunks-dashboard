@@ -6,7 +6,7 @@ export function UserFrom({ stroke, label }) {
       <div
         className="user__statistics__card__content__right__from__dot"
         style={{ backgroundColor: stroke }}
-      ></div>
+      />
       {label}
     </div>
   );

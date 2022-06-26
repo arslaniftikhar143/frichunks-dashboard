@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import TableEntryHeadings from "../Components/TableEntryHeadings";
-import DeleteConfirmation from "./DeleteConfirmation";
-import { OrdersDetailsListEntry } from "./OrdersDetailsListEntry";
+import DeleteConfirmation from "../Components/DeleteConfirmation";
+import { OrdersDetailsListEntry } from "../Components/OrdersDetailsListEntry";
 
 export default function OrderDetails({}) {
   const [deleteConfirmation, setDeleteConfirmation] = useState(false);

@@ -1,12 +1,14 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { Widget } from "react-cloudinary-upload-widget";
+import Select from "react-select";
+import catagoryDataOption from "../constants/constant";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
-export default function AddCategory({ closeOnClick }) {
+export default function AddProduct({ closeOnClick }) {
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
   const [categories, setCategories] = useState("");
-  const [author, setAuthor] = useState("");
   const [content, setContent] = useState("");
 
   return (
@@ -14,18 +16,11 @@ export default function AddCategory({ closeOnClick }) {
       <form
         onSubmit={() => {
           closeOnClick(false);
-          axios.post(`https://dsmeglobal-api.herokuapp.com/api/v1/set_blog`, {
-            title: name,
-            author: author,
-            categories: categories,
-            image: image,
-            content: content,
-          });
         }}
         className="popup__container__form"
       >
         <div className="popup__container__form__header">
-          <div>Add Category</div>
+          <div>Add Product</div>
           <button
             onClick={() => {
               closeOnClick(false);
@@ -73,6 +68,45 @@ export default function AddCategory({ closeOnClick }) {
           <input
             type="text"
             placeholder="Name"
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
+            required
+          />
+        </div>
+        <div className="popup__container__form__heading">Categories</div>
+        <div className="login__container__content__form__input">
+          <Select
+            options={catagoryDataOption}
+            placeholder="Categories"
+            isMulti
+            required
+            value={categories}
+            onChange={(e) => {
+              setCategories(e);
+            }}
+          />
+        </div>
+        <div
+          className="popup__container__form__heading"
+          style={{ marginTop: 10 }}
+        >
+          Description
+        </div>
+        <CKEditor
+          editor={ClassicEditor}
+          data=""
+          onChange={(event, editor) => {
+            const data = editor.getData();
+            setContent(data);
+          }}
+        />
+        <div className="popup__container__form__heading">Price</div>
+        <div className="login__container__content__form__input">
+          <input
+            type="text"
+            placeholder="Price"
             value={name}
             onChange={(e) => {
               setName(e.target.value);

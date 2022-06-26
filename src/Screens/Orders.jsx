@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import TableEntryHeadings from "../Components/TableEntryHeadings";
-import DeleteConfirmation from "./DeleteConfirmation";
+import DeleteConfirmation from "../Components/DeleteConfirmation";
 import { useNavigate } from "react-router-dom";
-import { OrdersListEntry } from "./OrdersListEntry";
+import { OrdersListEntry } from "../Components/OrdersListEntry";
 
 export default function Orders({ setIsEdit, setIsAdd, setEditId }) {
   const navigate = useNavigate();

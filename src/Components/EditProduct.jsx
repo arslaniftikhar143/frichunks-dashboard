@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { Widget } from "react-cloudinary-upload-widget";
 import Select from "react-select";
@@ -6,30 +5,22 @@ import catagoryDataOption from "../constants/constant";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
-export default function AddProduct({ closeOnClick }) {
+export default function EditProduct({ closeOnClick, editId }) {
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
+  const [oldImage, setOldImage] = useState("");
   const [categories, setCategories] = useState("");
-  const [author, setAuthor] = useState("");
   const [content, setContent] = useState("");
-
   return (
     <div className="popup__container">
       <form
         onSubmit={() => {
           closeOnClick(false);
-          axios.post(`https://dsmeglobal-api.herokuapp.com/api/v1/set_blog`, {
-            title: name,
-            author: author,
-            categories: categories,
-            image: image,
-            content: content,
-          });
         }}
         className="popup__container__form"
       >
         <div className="popup__container__form__header">
-          <div>Add Product</div>
+          <div>Edit Product</div>
           <button
             onClick={() => {
               closeOnClick(false);
@@ -105,7 +96,7 @@ export default function AddProduct({ closeOnClick }) {
         </div>
         <CKEditor
           editor={ClassicEditor}
-          data=""
+          data={content}
           onChange={(event, editor) => {
             const data = editor.getData();
             setContent(data);
@@ -131,17 +122,16 @@ export default function AddProduct({ closeOnClick }) {
             cloudName={"mehfoozurrehman"}
             uploadPreset={"cqido5en"}
             buttonText={
-              image !== "" ? (
-                <img
-                  src={
-                    "https://res.cloudinary.com/mehfoozurrehman/image/upload/" +
-                    image
-                  }
-                  style={{ width: "100%", height: "100%" }}
-                />
-              ) : (
-                "+"
-              )
+              <img
+                src={
+                  image === ""
+                    ? "https://res.cloudinary.com/mehfoozurrehman/image/upload/" +
+                      oldImage
+                    : "https://res.cloudinary.com/mehfoozurrehman/image/upload/" +
+                      image
+                }
+                style={{ width: "100%", height: "100%" }}
+              />
             }
             style={{
               color: "black",
@@ -176,7 +166,7 @@ export default function AddProduct({ closeOnClick }) {
           style={{ marginTop: "1em", marginBottom: "1em" }}
           className="secondary__button"
         >
-          Add
+          Edit
         </button>
       </form>
     </div>

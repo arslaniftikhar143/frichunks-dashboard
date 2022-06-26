@@ -1,6 +1,6 @@
 import React from "react";
 import UserStatisticsChart from "../Components/UserStatisticsChart";
-import { UserFrom } from "./UserFrom";
+import { UserFrom } from "../Components/UserFrom";
 
 export function CategoryStatisticsCard() {
   return (

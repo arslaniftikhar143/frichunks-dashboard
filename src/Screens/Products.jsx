@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import TableEntryHeadings from "../Components/TableEntryHeadings";
-import DeleteConfirmation from "./DeleteConfirmation";
-import { ProductsListEntry } from "./ProductsListEntry";
+import DeleteConfirmation from "../Components/DeleteConfirmation";
+import { ProductsListEntry } from "../Components/ProductsListEntry";
 
 export default function Products({ setIsEdit, setIsAdd, setEditId }) {
   const [deleteConfirmation, setDeleteConfirmation] = useState(false);

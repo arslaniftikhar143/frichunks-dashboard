@@ -1,7 +1,7 @@
 import React from "react";
-import { MonthlyStatsCard } from "./MonthlyStatsCard";
-import { StatsCard } from "./StatsCard";
-import { CategoryStatisticsCard } from "./CategoryStatisticsCard";
+import { MonthlyStatsCard } from "../Components/MonthlyStatsCard";
+import { StatsCard } from "../Components/StatsCard";
+import { CategoryStatisticsCard } from "../Components/CategoryStatisticsCard";
 
 export default function Dashboard() {
   return (

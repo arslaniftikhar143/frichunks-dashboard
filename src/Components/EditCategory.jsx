@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { Widget } from "react-cloudinary-upload-widget";
 
@@ -6,23 +5,12 @@ export default function EditCategory({ closeOnClick, editId }) {
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
   const [oldImage, setOldImage] = useState("");
-  const [categories, setCategories] = useState("");
-  const [author, setAuthor] = useState("");
-  const [content, setContent] = useState("");
 
   return (
     <div className="popup__container">
       <form
         onSubmit={() => {
           closeOnClick(false);
-          axios.put(`https://dsmeglobal-api.herokuapp.com/api/v1/update_blog`, {
-            _id: editId._id,
-            title: name,
-            image: image === "" ? oldImage : image,
-            categories: categories,
-            author: author,
-            content: content,
-          });
         }}
         className="popup__container__form"
       >
