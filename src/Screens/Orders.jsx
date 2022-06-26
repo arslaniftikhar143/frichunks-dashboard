@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import TableEntryHeadings from "../Components/TableEntryHeadings";
-import Loader from "./Loader";
 import DeleteConfirmation from "./DeleteConfirmation";
 import { parseDate } from "../utils/parseDate";
 import { useNavigate } from "react-router-dom";
+import Loader from "./Loader";
+import axios from "axios";
 
 export default function Orders({
   isAdd,

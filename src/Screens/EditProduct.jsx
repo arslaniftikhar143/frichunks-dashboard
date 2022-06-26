@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Widget } from "react-cloudinary-upload-widget";
 import Select from "react-select";
 import catagoryDataOption from "../constants/constant";
@@ -13,21 +13,6 @@ export default function EditProduct({ closeOnClick, editId }) {
   const [categories, setCategories] = useState("");
   const [author, setAuthor] = useState("");
   const [content, setContent] = useState("");
-  // console.log({
-  //   _id: editId._id,
-  //   title: name,
-  //   image: image === "" ? oldImage : image,
-  //   categories: categories,
-  //   author: author,
-  //   content: content,
-  // });
-  // useEffect(() => {
-  //   setName(editId.title);
-  //   setOldImage(editId.image);
-  //   setCategories(editId.categories);
-  //   setAuthor(editId.author);
-  //   setContent(editId.content);
-  // }, [editId]);
   return (
     <div className="popup__container">
       <form
@@ -126,7 +111,7 @@ export default function EditProduct({ closeOnClick, editId }) {
             const data = editor.getData();
             setContent(data);
           }}
-        />{" "}
+        />
         <div className="popup__container__form__heading">Price</div>
         <div className="login__container__content__form__input">
           <input

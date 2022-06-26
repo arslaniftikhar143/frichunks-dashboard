@@ -5,13 +5,7 @@ import Loader from "./Loader";
 import DeleteConfirmation from "./DeleteConfirmation";
 import { parseDate } from "../utils/parseDate";
 
-export default function Users({
-  isAdd,
-  isEdit,
-  setIsEdit,
-  setIsAdd,
-  setEditId,
-}) {
+export default function Users({ isAdd, isEdit }) {
   const [BlogData, setBlogData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [deleteConfirmation, setDeleteConfirmation] = useState(false);
@@ -113,13 +107,6 @@ export default function Users({
                           className="entry__info__row__text__img"
                         />
                       </div>
-                      {/* <div className="entry__info__row__text">{item.title}</div>
-                      
-                      
-                      <div className="entry__info__row__text">
-                        {item.isOur.map((item) => item.label)}
-                      </div>
-                      <div className="entry__info__row__text">{item.url}</div> */}
                     </div>
                   ))
                 ) : (

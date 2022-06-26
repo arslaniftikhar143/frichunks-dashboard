@@ -9,7 +9,6 @@ export default function InputBox({
   disabled,
   value,
   style,
-  label,
   name,
   options,
   onChange,

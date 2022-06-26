@@ -1,10 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Widget } from "react-cloudinary-upload-widget";
-import Select from "react-select";
-import catagoryDataOption from "../constants/constant";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 export default function AddCategory({ closeOnClick }) {
   const [name, setName] = useState("");
@@ -106,7 +102,6 @@ export default function AddCategory({ closeOnClick }) {
             }
             style={{
               color: "black",
-              border: "none",
               width: "120px",
               backgroundColor: "white",
               border: "1px solid #242424",

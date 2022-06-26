@@ -31,7 +31,6 @@ export default function Categories({
     { heading: "Name" },
     { heading: "Image" },
   ];
-
   return (
     <>
       <div className="main__container">

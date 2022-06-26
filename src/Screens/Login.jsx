@@ -111,7 +111,6 @@ export default function Login() {
             </text>
           </g>
         </svg>
-
         <div className="login__container__content__form">
           <div className="login__container__content__form__input">
             <input

@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { WidgetLoader } from "react-cloudinary-upload-widget";
 import { Routes, Route, Outlet, useNavigate } from "react-router-dom";
+import { WidgetLoader } from "react-cloudinary-upload-widget";
 import axios from "axios";
-import DeleteConfirmation from "./Screens/DeleteConfirmation";
 import Header from "./Components/Header";
 import Sidebar from "./Components/Sidebar";
 import Dashboard from "./Screens/Dashboard.jsx";
@@ -31,7 +30,7 @@ function Main() {
   );
 }
 
-function App() {
+export default function App() {
   axios.defaults.headers.common["Bypass-Tunnel-Reminder"] = true;
   const navigate = useNavigate();
   const [isAddProduct, setIsAddProduct] = useState(false);
@@ -40,9 +39,6 @@ function App() {
   const [isEditCategory, setIsEditCategory] = useState(false);
   const [isAddOrder, setIsAddOrder] = useState(false);
   const [isEditOrder, setIsEditOrder] = useState(false);
-  const [deleteConfirmation, setDeleteConfirmation] = useState(false);
-  const [deleteConfirmationURL, setDeleteConfirmationURL] = useState("");
-  const [deleteConfirmationId, setDeleteConfirmationId] = useState("");
 
   useEffect(() => {
     if (window.localStorage.getItem("user") === null) {
@@ -59,12 +55,7 @@ function App() {
       {isEditCategory ? (
         <EditCategory closeOnClick={setIsEditCategory} />
       ) : null}
-      {deleteConfirmation ? (
-        <DeleteConfirmation
-          deleteConfirmationURL={deleteConfirmationURL}
-          deleteConfirmationId={deleteConfirmationId}
-        />
-      ) : null}
+
       <WidgetLoader />
       <Routes>
         <Route path="/" element={<Login />} />
@@ -110,5 +101,3 @@ function App() {
     </>
   );
 }
-
-export default App;

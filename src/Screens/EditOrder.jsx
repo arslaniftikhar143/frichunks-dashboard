@@ -1,10 +1,7 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Widget } from "react-cloudinary-upload-widget";
+import React, { useState } from "react";
 import Select from "react-select";
 import catagoryDataOption from "../constants/constant";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 export default function EditOrder({ closeOnClick, editId }) {
   const [name, setName] = useState("");
@@ -13,21 +10,6 @@ export default function EditOrder({ closeOnClick, editId }) {
   const [categories, setCategories] = useState("");
   const [author, setAuthor] = useState("");
   const [content, setContent] = useState("");
-  // console.log({
-  //   _id: editId._id,
-  //   title: name,
-  //   image: image === "" ? oldImage : image,
-  //   categories: categories,
-  //   author: author,
-  //   content: content,
-  // });
-  // useEffect(() => {
-  //   setName(editId.title);
-  //   setOldImage(editId.image);
-  //   setCategories(editId.categories);
-  //   setAuthor(editId.author);
-  //   setContent(editId.content);
-  // }, [editId]);
   return (
     <div className="popup__container">
       <form
