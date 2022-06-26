@@ -154,7 +154,7 @@ export default function Login() {
           <button type="submit" className="secondary__button">
             Login
           </button>
-          {error != "" ? (
+          {error !== "" ? (
             <div
               style={{ color: "red", textAlign: "center", marginTop: ".5em" }}
             >
