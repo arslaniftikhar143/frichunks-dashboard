@@ -1,5 +1,5 @@
 import React from "react";
-import loading from "../Assets/loading.svg";
+import loading from "../Assets/loading.gif";
 
 export default function Loader() {
   return (

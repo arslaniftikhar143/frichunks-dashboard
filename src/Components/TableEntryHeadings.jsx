@@ -5,7 +5,7 @@ export default function TableEntryHeadings({ tableHeadingEntryRow }) {
   return (
     <div className="table__container__header">
       {tableHeadingEntryRow.map((item, i) => (
-        <EntryHeadingData key={i} value={item.heading} />
+        <EntryHeadingData key={i} value={item} />
       ))}
     </div>
   );

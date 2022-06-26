@@ -2,7 +2,7 @@ import React from "react";
 import UserStatisticsChart from "../Components/UserStatisticsChart";
 import { UserFrom } from "./UserFrom";
 
-export function UserStatisticsCard() {
+export function CategoryStatisticsCard() {
   return (
     <div className="user__statistics__card">
       <div className="user__statistics__card__header">

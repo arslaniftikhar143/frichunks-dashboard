@@ -14,7 +14,9 @@ export function MonthlyStatsCard({ stroke, labal, valueInPercentage }) {
             style={{ minWidth: valueInPercentage, backgroundColor: stroke }}
           ></div>
         </div>
-        <div className="monthly__stats__card__content__value">56</div>
+        <div className="monthly__stats__card__content__value">
+          {valueInPercentage}
+        </div>
       </div>
     </div>
   );
