@@ -145,7 +145,7 @@ export default function AddProduct({ closeOnClick }) {
               cursor: "pointer",
               padding: 0,
             }}
-            folder={"dsme_global"}
+            folder={"frichunks"}
             cropping={true}
             multiple={false}
             autoClose={false}

@@ -1,19 +1,42 @@
+import axios from "axios";
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { Widget } from "react-cloudinary-upload-widget";
 
-export default function EditCategory({ closeOnClick, editId }) {
+export default function EditCategory({ closeOnClick }) {
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
   const [oldImage, setOldImage] = useState("");
+  const [categoryId, setCategoryId] = useState("");
+
+  useEffect(() => {
+    if (window.localStorage.getItem("orderEntry") !== null) {
+      const orderEntry = JSON.parse(window.localStorage.getItem("orderEntry"));
+      setCategoryId(orderEntry._id);
+      setName(orderEntry.name);
+      setOldImage(orderEntry.image);
+    }
+  }, []);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    axios
+      .put("https://frichunks.herokuapp.com/api/v1/category/edit", {
+        _id: categoryId,
+        name: name,
+        image: image === "" ? oldImage : image,
+      })
+      .then((res) => {
+        console.log(res.data);
+      });
+
+    closeOnClick(false);
+  }
 
   return (
     <div className="popup__container">
-      <form
-        onSubmit={() => {
-          closeOnClick(false);
-        }}
-        className="popup__container__form"
-      >
+      <form onSubmit={handleSubmit} className="popup__container__form">
         <div className="popup__container__form__header">
           <div>Edit Category</div>
           <button
@@ -100,7 +123,7 @@ export default function EditCategory({ closeOnClick, editId }) {
               cursor: "pointer",
               padding: 0,
             }}
-            folder={"dsme_global"}
+            folder={"frichunks"}
             cropping={true}
             multiple={false}
             autoClose={false}

@@ -8,6 +8,9 @@ export function ProductsListEntry({
   setDeleteConfirmation,
   setDeleteConfirmationId,
 }) {
+  const description =
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit..";
+
   return (
     <div className="entry__info__row">
       <div className="entry__info__row__btns">
@@ -21,7 +24,14 @@ export function ProductsListEntry({
       <div className="entry__info__row__text">10:30 PM</div>
       <div className="entry__info__row__text">RS 1250</div>
       <div className="entry__info__row__text">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, eius!
+        {description.length > 100 ? (
+          <a href="">
+            View Description
+            <div className="entry__info__row__text__message">{description}</div>
+          </a>
+        ) : (
+          description
+        )}
       </div>
       <div className="entry__info__row__text">
         <img

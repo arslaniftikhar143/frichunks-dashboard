@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { Widget } from "react-cloudinary-upload-widget";
 
@@ -5,14 +6,24 @@ export default function AddCategory({ closeOnClick }) {
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
 
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    axios
+      .post("https://frichunks.herokuapp.com/api/v1/category/create", {
+        name: name,
+        image: image,
+      })
+      .then((res) => {
+        console.log(res.data);
+      });
+
+    closeOnClick(false);
+  }
+
   return (
     <div className="popup__container">
-      <form
-        onSubmit={() => {
-          closeOnClick(false);
-        }}
-        className="popup__container__form"
-      >
+      <form onSubmit={handleSubmit} className="popup__container__form">
         <div className="popup__container__form__header">
           <div>Add Category</div>
           <button
@@ -100,7 +111,7 @@ export default function AddCategory({ closeOnClick }) {
               cursor: "pointer",
               padding: 0,
             }}
-            folder={"dsme_global"}
+            folder={"frichunks"}
             cropping={true}
             multiple={false}
             autoClose={false}
