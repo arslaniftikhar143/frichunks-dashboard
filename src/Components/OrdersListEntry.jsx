@@ -2,6 +2,7 @@ import React from "react";
 import { EditButton } from "./EditButton";
 import { DeleteButton } from "./DeleteButton";
 import { ViewButton } from "../Components/ViewButton";
+import { parseDate } from "../utils/parseDate";
 
 export function OrdersListEntry({
   setIsEdit,
@@ -9,6 +10,7 @@ export function OrdersListEntry({
   setDeleteConfirmation,
   setDeleteConfirmationId,
   navigate,
+  data,
 }) {
   return (
     <div className="entry__info__row">
@@ -17,14 +19,17 @@ export function OrdersListEntry({
         <DeleteButton
           setDeleteConfirmation={setDeleteConfirmation}
           setDeleteConfirmationId={setDeleteConfirmationId}
+          id={data._id}
         />
       </div>
-      <div className="entry__info__row__text">User Name</div>
-      <div className="entry__info__row__text">10/20/2020</div>
-      <div className="entry__info__row__text">Paid</div>
       <div className="entry__info__row__text">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, maiores!
+        {data.user.map((item) => (
+          <>{item.name}</>
+        ))}
       </div>
+      <div className="entry__info__row__text">{parseDate(data.createdAt)}</div>
+      <div className="entry__info__row__text">{data.status}</div>
+      <div className="entry__info__row__text">{data.address}</div>
       <div className="entry__info__row__btns">
         <ViewButton navigate={navigate} />
       </div>
