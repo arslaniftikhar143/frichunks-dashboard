@@ -6,7 +6,6 @@ export function NavLink({ title, svg, path, defaultChecked, id, onClick }) {
   return (
     <div className="sidebar__container__content__entry">
       <input
-        defaultChecked={defaultChecked}
         type="radio"
         name="sidebar__container__content__entry__input"
         id={id ? id : "sidebar__container__content__entry__input"}

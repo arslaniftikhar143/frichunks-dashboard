@@ -3,12 +3,13 @@ import React from "react";
 export function DeleteButton({
   setDeleteConfirmation,
   setDeleteConfirmationId,
+  id,
 }) {
   return (
     <button
       onClick={() => {
         setDeleteConfirmation(true);
-        setDeleteConfirmationId([]);
+        setDeleteConfirmationId(id);
       }}
       className="secondary__button__rounded"
     >

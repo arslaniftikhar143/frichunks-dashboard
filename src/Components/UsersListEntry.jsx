@@ -4,6 +4,7 @@ import { DeleteButton } from "./DeleteButton";
 export function UsersListEntry({
   setDeleteConfirmation,
   setDeleteConfirmationId,
+  data,
 }) {
   return (
     <div className="entry__info__row">
@@ -11,14 +12,13 @@ export function UsersListEntry({
         <DeleteButton
           setDeleteConfirmation={setDeleteConfirmation}
           setDeleteConfirmationId={setDeleteConfirmationId}
+          id={data._id}
         />
       </div>
-      <div className="entry__info__row__text">User name</div>
-      <div className="entry__info__row__text">Someone@gmail.com</div>
-      <div className="entry__info__row__text">+92 12355356</div>
-      <div className="entry__info__row__text">
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nobis, nemo.
-      </div>
+      <div className="entry__info__row__text">{data.username}</div>
+      <div className="entry__info__row__text">{data.email}</div>
+      <div className="entry__info__row__text">{data.phone}</div>
+      <div className="entry__info__row__text">{data.address}</div>
     </div>
   );
 }

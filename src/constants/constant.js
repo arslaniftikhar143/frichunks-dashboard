@@ -2,7 +2,7 @@ import axios from "axios";
 let catagoryDataOption = [];
 
 axios
-  .get(`https://dsmeglobal-api.herokuapp.com/api/v1/get_category`)
+  .get(`https://frichunks.herokuapp.com/api/v1/category/get_all`)
   .then((res) => {
     res.data.map((item) =>
       catagoryDataOption.push({ value: item.name, label: item.name })

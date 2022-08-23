@@ -8,14 +8,17 @@ export default function DeleteConfirmation({
   fetch,
 }) {
   function onDelete() {
-    axios.delete(
-      `https://dsmeglobal-api.herokuapp.com/api/v1/` + deleteConfirmationURL,
-      {
-        data: { _id: deleteConfirmationId },
-      }
-    );
+    axios
+      .delete(
+        `https://frichunks.herokuapp.com/api/v1/` + deleteConfirmationURL,
+        {
+          data: { _id: deleteConfirmationId },
+        }
+      )
+      .then(() => {
+        fetch();
+      });
     closeOnClick(false);
-    fetch();
   }
   return (
     <div className="popup__container">

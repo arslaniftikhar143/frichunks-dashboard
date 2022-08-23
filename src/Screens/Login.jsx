@@ -17,13 +17,14 @@ export default function Login() {
   function handleSubmit(e) {
     e.preventDefault();
     axios
-      .post(`https://dsmeglobal-api.herokuapp.com/api/v1/login`, {
+      .post(`https://frichunks.herokuapp.com/api/v1/user/login`, {
         email: email,
         password: password,
       })
       .then((res) => {
         if (res.data.message) {
           setError(res.data.message);
+          console.log(res.data.message);
           window.localStorage.clear("user");
         } else {
           window.localStorage.setItem("user", res.data.email);
