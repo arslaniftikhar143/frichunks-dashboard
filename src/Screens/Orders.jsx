@@ -5,7 +5,13 @@ import { useNavigate } from "react-router-dom";
 import { OrdersListEntry } from "../Components/OrdersListEntry";
 import axios from "axios";
 
-export default function Orders({ setIsEdit, setIsAdd, setEditId }) {
+export default function Orders({
+  isAdd,
+  isEdit,
+  setIsEdit,
+  setIsAdd,
+  setEditId,
+}) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -20,7 +26,7 @@ export default function Orders({ setIsEdit, setIsAdd, setEditId }) {
   useEffect(() => {
     fetchData();
     window.addEventListener("focus", fetchData);
-  }, []);
+  }, [!isAdd, !isEdit]);
 
   const navigate = useNavigate();
   const [deleteConfirmation, setDeleteConfirmation] = useState(false);

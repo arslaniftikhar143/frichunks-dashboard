@@ -1,11 +1,11 @@
 import React from "react";
 
-export function EditButton({ setIsEdit, setEditId }) {
+export function EditButton({ setIsEdit, item }) {
   return (
     <button
       onClick={() => {
         setIsEdit(true);
-        setEditId({});
+        window.localStorage.setItem("orderEntry", JSON.stringify(item));
       }}
       className="primary__button__rounded"
     >

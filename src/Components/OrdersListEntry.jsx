@@ -15,7 +15,7 @@ export function OrdersListEntry({
   return (
     <div className="entry__info__row">
       <div className="entry__info__row__btns">
-        <EditButton setIsEdit={setIsEdit} setEditId={setEditId} />
+        <EditButton setIsEdit={setIsEdit} setEditId={setEditId} item={data} />
         <DeleteButton
           setDeleteConfirmation={setDeleteConfirmation}
           setDeleteConfirmationId={setDeleteConfirmationId}
