@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Select from "react-select";
-import catagoryDataOption from "../constants/constant";
+import { catagoryDataOption } from "../constants/constant";
 
 export default function EditOrder({ closeOnClick, editId }) {
   const [categories, setCategories] = useState("");

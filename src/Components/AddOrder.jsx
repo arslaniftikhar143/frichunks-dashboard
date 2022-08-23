@@ -1,19 +1,35 @@
 import React, { useState } from "react";
 import Select from "react-select";
-import catagoryDataOption from "../constants/constant";
+import axios from "axios";
+import { userDataOption } from "../constants/userDataOptions";
+import { productDataOption } from "../constants/productDataOption";
 
 export default function AddOrder({ closeOnClick }) {
-  const [categories, setCategories] = useState("");
-  const [author, setAuthor] = useState("");
+  const [user, setUser] = useState([]);
+  const [address, setAddress] = useState("");
+  const [status, setStatus] = useState([]);
+  const [products, setProducts] = useState([]);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    axios
+      .post("https://frichunks.herokuapp.com/api/v1/order/create", {
+        user: user,
+        products: products,
+        address: address,
+        status: status,
+      })
+      .then((res) => {
+        console.log(res.data);
+      });
+
+    closeOnClick(false);
+  }
 
   return (
     <div className="popup__container">
-      <form
-        onSubmit={() => {
-          closeOnClick(false);
-        }}
-        className="popup__container__form"
-      >
+      <form onSubmit={handleSubmit} className="popup__container__form">
         <div className="popup__container__form__header">
           <div>Add Order</div>
           <button
@@ -61,24 +77,27 @@ export default function AddOrder({ closeOnClick }) {
         <div className="popup__container__form__heading">User</div>
         <div className="login__container__content__form__input">
           <Select
-            options={catagoryDataOption}
+            options={userDataOption}
             placeholder="User"
             required
-            value={categories}
+            value={user}
             onChange={(e) => {
-              setCategories(e);
+              setUser(e);
             }}
           />
         </div>
         <div className="popup__container__form__heading">Status</div>
         <div className="login__container__content__form__input">
           <Select
-            options={catagoryDataOption}
+            options={[
+              { value: "Pending", label: "Pending" },
+              { value: "Delivered", label: "Delivered" },
+            ]}
             placeholder="Status"
             required
-            value={categories}
+            value={status}
             onChange={(e) => {
-              setCategories(e);
+              setStatus(e);
             }}
           />
         </div>
@@ -87,9 +106,9 @@ export default function AddOrder({ closeOnClick }) {
           <input
             type="text"
             placeholder="Address"
-            value={author}
+            value={address}
             onChange={(e) => {
-              setAuthor(e.target.value);
+              setAddress(e.target.value);
             }}
             required
           />
@@ -97,13 +116,13 @@ export default function AddOrder({ closeOnClick }) {
         <div className="popup__container__form__heading">Products</div>
         <div className="login__container__content__form__input">
           <Select
-            options={catagoryDataOption}
+            options={productDataOption}
             placeholder="Products"
             isMulti
             required
-            value={categories}
+            value={products}
             onChange={(e) => {
-              setCategories(e);
+              setProducts(e);
             }}
           />
         </div>

@@ -23,12 +23,12 @@ export function OrdersListEntry({
         />
       </div>
       <div className="entry__info__row__text">
-        {data.user.map((item) => (
-          <>{item.name}</>
-        ))}
+        {data.user.map((item) => item.label)}
       </div>
       <div className="entry__info__row__text">{parseDate(data.createdAt)}</div>
-      <div className="entry__info__row__text">{data.status}</div>
+      <div className="entry__info__row__text">
+        {data.status.map((item) => item.label)}
+      </div>
       <div className="entry__info__row__text">{data.address}</div>
       <div className="entry__info__row__btns">
         <ViewButton navigate={navigate} />

@@ -1,5 +1,5 @@
 import axios from "axios";
-let catagoryDataOption = [];
+export let catagoryDataOption = [];
 
 axios
   .get(`https://frichunks.herokuapp.com/api/v1/category/get_all`)
@@ -8,5 +8,3 @@ axios
       catagoryDataOption.push({ value: item.name, label: item.name })
     );
   });
-
-export default catagoryDataOption;

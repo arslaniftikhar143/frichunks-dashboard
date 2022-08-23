@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Widget } from "react-cloudinary-upload-widget";
 import Select from "react-select";
-import catagoryDataOption from "../constants/constant";
+import { catagoryDataOption } from "../constants/constant";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
