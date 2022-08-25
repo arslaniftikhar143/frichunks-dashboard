@@ -33,8 +33,7 @@ export default function DeleteConfirmation({
               marginTop: "1em",
               marginRight: "1em",
             }}
-            className="primary__button"
-          >
+            className="primary__button">
             Delete
           </button>
           <button
@@ -43,8 +42,7 @@ export default function DeleteConfirmation({
             }}
             type="button"
             style={{ marginTop: "1em" }}
-            className="secondary__button"
-          >
+            className="secondary__button">
             Cancel
           </button>
         </div>
