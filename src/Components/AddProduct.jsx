@@ -4,21 +4,35 @@ import Select from "react-select";
 import { catagoryDataOption } from "../constants/constant";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import axios from "axios";
 
 export default function AddProduct({ closeOnClick }) {
   const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
   const [image, setImage] = useState("");
-  const [categories, setCategories] = useState("");
+  const [categories, setCategories] = useState([]);
   const [content, setContent] = useState("");
+  console.log(categories);
+  function handleSubmit(e) {
+    e.preventDefault();
 
+    axios
+      .post("http://localhost:8080/api/v1/product/create", {
+        name: name,
+        price: price,
+        image: image,
+        categories: categories,
+        description: content,
+      })
+      .then((res) => {
+        console.log(res.data);
+      });
+
+    closeOnClick(false);
+  }
   return (
     <div className="popup__container">
-      <form
-        onSubmit={() => {
-          closeOnClick(false);
-        }}
-        className="popup__container__form"
-      >
+      <form onSubmit={handleSubmit} className="popup__container__form">
         <div className="popup__container__form__header">
           <div>Add Product</div>
           <button
@@ -26,14 +40,12 @@ export default function AddProduct({ closeOnClick }) {
               closeOnClick(false);
             }}
             type="button"
-            className="popup__container__form__close__btn"
-          >
+            className="popup__container__form__close__btn">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="14.829"
               height="14.829"
-              viewBox="0 0 14.829 14.829"
-            >
+              viewBox="0 0 14.829 14.829">
               <g id="x" transform="translate(-4.586 -4.586)">
                 <line
                   id="Line_20"
@@ -90,8 +102,7 @@ export default function AddProduct({ closeOnClick }) {
         </div>
         <div
           className="popup__container__form__heading"
-          style={{ marginTop: 10 }}
-        >
+          style={{ marginTop: 10 }}>
           Description
         </div>
         <CKEditor
@@ -107,9 +118,9 @@ export default function AddProduct({ closeOnClick }) {
           <input
             type="text"
             placeholder="Price"
-            value={name}
+            value={price}
             onChange={(e) => {
-              setName(e.target.value);
+              setPrice(e.target.value);
             }}
             required
           />
@@ -165,8 +176,7 @@ export default function AddProduct({ closeOnClick }) {
         <button
           type="submit"
           style={{ marginTop: "1em", marginBottom: "1em" }}
-          className="secondary__button"
-        >
+          className="secondary__button">
           Add
         </button>
       </form>

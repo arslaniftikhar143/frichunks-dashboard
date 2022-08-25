@@ -37,14 +37,12 @@ export default function AddOrder({ closeOnClick }) {
               closeOnClick(false);
             }}
             type="button"
-            className="popup__container__form__close__btn"
-          >
+            className="popup__container__form__close__btn">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="14.829"
               height="14.829"
-              viewBox="0 0 14.829 14.829"
-            >
+              viewBox="0 0 14.829 14.829">
               <g id="x" transform="translate(-4.586 -4.586)">
                 <line
                   id="Line_20"
@@ -129,8 +127,7 @@ export default function AddOrder({ closeOnClick }) {
         <button
           type="submit"
           style={{ marginTop: "1em", marginBottom: "1em" }}
-          className="secondary__button"
-        >
+          className="secondary__button">
           Add
         </button>
       </form>

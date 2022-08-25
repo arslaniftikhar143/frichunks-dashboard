@@ -1,24 +1,53 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Widget } from "react-cloudinary-upload-widget";
 import Select from "react-select";
 import { catagoryDataOption } from "../constants/constant";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import axios from "axios";
 
 export default function EditProduct({ closeOnClick, editId }) {
   const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
   const [image, setImage] = useState("");
   const [oldImage, setOldImage] = useState("");
   const [categories, setCategories] = useState("");
   const [content, setContent] = useState("");
+  const [productId, setproductId] = useState("");
+
+  useEffect(() => {
+    if (window.localStorage.getItem("orderEntry") !== null) {
+      const orderEntry = JSON.parse(window.localStorage.getItem("orderEntry"));
+      setproductId(orderEntry._id);
+      setName(orderEntry.name);
+      setOldImage(orderEntry.image);
+      setPrice(orderEntry.price);
+      setContent(orderEntry.description);
+      setCategories(orderEntry.categories);
+    }
+  }, []);
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    axios
+      .put("http://localhost:8080/api/v1/product/edit", {
+        _id: productId,
+        name: name,
+        price: price,
+        categories: categories,
+        description: content,
+        image: image === "" ? oldImage : image,
+      })
+      .then((res) => {
+        console.log(res.data);
+      });
+
+    closeOnClick(false);
+  }
+
   return (
     <div className="popup__container">
-      <form
-        onSubmit={() => {
-          closeOnClick(false);
-        }}
-        className="popup__container__form"
-      >
+      <form onSubmit={handleSubmit} className="popup__container__form">
         <div className="popup__container__form__header">
           <div>Edit Product</div>
           <button
@@ -26,14 +55,12 @@ export default function EditProduct({ closeOnClick, editId }) {
               closeOnClick(false);
             }}
             type="button"
-            className="popup__container__form__close__btn"
-          >
+            className="popup__container__form__close__btn">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="14.829"
               height="14.829"
-              viewBox="0 0 14.829 14.829"
-            >
+              viewBox="0 0 14.829 14.829">
               <g id="x" transform="translate(-4.586 -4.586)">
                 <line
                   id="Line_20"
@@ -90,8 +117,7 @@ export default function EditProduct({ closeOnClick, editId }) {
         </div>
         <div
           className="popup__container__form__heading"
-          style={{ marginTop: 10 }}
-        >
+          style={{ marginTop: 10 }}>
           Description
         </div>
         <CKEditor
@@ -107,9 +133,9 @@ export default function EditProduct({ closeOnClick, editId }) {
           <input
             type="text"
             placeholder="Price"
-            value={name}
+            value={price}
             onChange={(e) => {
-              setName(e.target.value);
+              setPrice(e.target.value);
             }}
             required
           />
@@ -164,8 +190,7 @@ export default function EditProduct({ closeOnClick, editId }) {
         <button
           type="submit"
           style={{ marginTop: "1em", marginBottom: "1em" }}
-          className="secondary__button"
-        >
+          className="secondary__button">
           Edit
         </button>
       </form>

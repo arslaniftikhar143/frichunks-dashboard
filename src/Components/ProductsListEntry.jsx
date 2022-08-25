@@ -1,30 +1,32 @@
 import React from "react";
 import { EditButton } from "./EditButton";
 import { DeleteButton } from "./DeleteButton";
-
+import { getText } from "../utils/getText";
+import { parseTime } from "../utils/parseTime";
 export function ProductsListEntry({
   setIsEdit,
   setEditId,
   setDeleteConfirmation,
   setDeleteConfirmationId,
+  data,
 }) {
-  const description =
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit..";
+  const description = getText(data.description);
 
   return (
     <div className="entry__info__row">
       <div className="entry__info__row__btns">
-        <EditButton setIsEdit={setIsEdit} setEditId={setEditId} />
+        <EditButton setIsEdit={setIsEdit} setEditId={setEditId} item={data} />
         <DeleteButton
           setDeleteConfirmation={setDeleteConfirmation}
           setDeleteConfirmationId={setDeleteConfirmationId}
+          id={data._id}
         />
       </div>
-      <div className="entry__info__row__text">Pizza</div>
-      <div className="entry__info__row__text">10:30 PM</div>
-      <div className="entry__info__row__text">RS 1250</div>
+      <div className="entry__info__row__text">{data.name}</div>
+      <div className="entry__info__row__text">{parseTime(data.createdAt)}</div>
+      <div className="entry__info__row__text">{data.price}</div>
       <div className="entry__info__row__text">
-        {description.length > 100 ? (
+        {description.length > 70 ? (
           <a href="">
             View Description
             <div className="entry__info__row__text__message">{description}</div>
@@ -35,7 +37,10 @@ export function ProductsListEntry({
       </div>
       <div className="entry__info__row__text">
         <img
-          src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+          src={
+            "https://res.cloudinary.com/mehfoozurrehman/image/upload/" +
+            data.image
+          }
           alt="tableEntryPic"
           className="entry__info__row__text__img"
         />
